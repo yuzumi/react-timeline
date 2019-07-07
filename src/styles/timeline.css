@@ -1,0 +1,171 @@
+/* Variables */
+.timeline {
+  /* Timeline */
+  --line__width: 0.25rem;
+  --line__background-color: crimson;
+
+  /* Item */
+  --item__width: 50%;
+  --item__padding: 2rem;
+  --item__margin: 0.875rem 0;
+
+  /* Content */
+  --content__padding: 1rem;
+  --contnet__box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  --content__border-radius: 0.25rem;
+  --content__background-color: #fff;
+  --content__width: 90%;
+  --content__max-width: 425px;
+
+  /* Circle */
+  --circle__size: 1.25rem;
+  --circle__border: 3px solid crimson;
+  --circle__background-color: #fff;
+  --circle__z-index: 100;
+  --circle__shift: calc(calc(var(--item__padding) * -1) - calc(var(--circle__size) / 2));
+
+  /* Triangle */
+  --triangle__size: 1rem;
+  --triangle__background-color: #fff;
+  --triangle__box-shadow--is-odd: 1px -1px 1px rgba(0,0,0,0.2);
+  --triangle__box-shadow--is-even: -1px 1px 1px rgba(0,0,0,0.2);
+  --triangle__shift: calc(calc(var(--triangle__size) / 2) * -1);
+}
+
+/* Timeline */
+.timeline {
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+  margin: 2rem 0;
+}
+
+.timeline::after {
+  content: "";
+
+  position: absolute;
+  left: calc(50% - calc(var(--line__width) / 2));
+  
+  width: var(--line__width);
+  height: 100%;
+
+  background-color: var(--line__background-color);
+}
+
+/* Timeline Item */
+.timeline-item {
+  display: flex;
+
+  margin: var(--item__margin);
+  width: var(--item__width);
+
+  position: relative;
+}
+
+.timeline-item--is-even {
+  align-self: flex-end;
+  justify-content: flex-start;
+
+  padding-left: var(--item__padding);  
+}
+
+.timeline-item--is-odd {
+  align-self: flex-start;
+  justify-content: flex-end;
+
+  padding-right: var(--item__padding);
+}
+
+/* Timeline Item Content */
+.timeline-item__content {
+  display: flex;
+  flex-direction: column;
+
+  padding: var(--content__padding);
+  max-width: var(--content__max-width);
+  width: var(--content__width);
+
+  box-shadow: var(--contnet__box-shadow);
+  border-radius: var(--content__border-radius);
+  background-color: var(--content__background-color);
+
+  position: relative;
+}
+
+.timeline-item--is-even .timeline-item__content {
+  text-align: left;
+  align-items: flex-start;
+}
+
+.timeline-item--is-odd .timeline-item__content {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.timeline-item__tag {
+  background-color: crimson;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 0.275rem;
+  text-transform: uppercase;
+}
+
+.timeline-item__datetime {
+  color: #777;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding-top: 0.5rem;
+}
+
+.timeline-item__text {
+  font-size: 1rem;
+  padding-top: 1rem;
+}
+
+/* Timeline Item Triangle */
+.timeline-item__content::after {
+  content: "";
+  position: absolute;
+  top: calc(50% - calc(var(--triangle__size) / 2));
+
+  background-color: var(--triangle__background-color);
+  transform: rotate(45deg);
+
+  width: var(--triangle__size);
+  height: var(--triangle__size);
+}
+
+.timeline-item--is-even .timeline-item__content::after {  
+  left: var(--triangle__shift);
+  box-shadow: var(--triangle__box-shadow--is-even);
+}
+
+.timeline-item--is-odd .timeline-item__content::after {
+  box-shadow: var(--triangle__box-shadow--is-odd);
+  right: var(--triangle__shift);
+}
+
+/* Timeline Item Circle */
+.timeline-item__circle {
+  position: absolute;
+  z-index: var(--circle__z-index);
+  top: calc(50% - calc(var(--circle__size) / 2));
+
+  background-color: var(--circle__background-color);
+  border: var(--circle__border);
+  border-radius: 50%;
+
+  width: var(--circle__size);
+  height: var(--circle__size); 
+}
+
+.timeline-item--is-even .timeline-item__circle {
+  left: var(--circle__shift);
+}
+
+.timeline-item--is-odd .timeline-item__circle {
+  right: var(--circle__shift);  
+}
