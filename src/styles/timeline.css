@@ -26,12 +26,14 @@
   --circle__background-color: #fff;
   --circle__z-index: 100;
   --circle__shift: calc(calc(var(--item__padding) * -1) - calc(var(--circle__size) / 2) + calc(var(--line__width) / 2));
+  --circle__position: calc(50% - calc(var(--circle__size) / 2));
 
   /* Triangle */
   --triangle__size: 1rem;
   --triangle__background-color: #fff;
   --triangle__box-shadow: -1px 1px 1px rgba(0,0,0,0.2);
   --triangle__shift: calc(calc(var(--triangle__size) / 2) * -1);
+  --triangle__position: calc(50% - calc(var(--triangle__size) / 2));
 }
 
 /* Timeline */
@@ -114,7 +116,7 @@
 .timeline-item__content::after {
   content: "";
   position: absolute;
-  top: calc(50% - calc(var(--triangle__size) / 2));
+  top: var(--triangle__position);
   left: var(--triangle__shift);
 
   box-shadow: var(--triangle__box-shadow);
@@ -129,7 +131,7 @@
 .timeline-item__circle {
   position: absolute;
   z-index: var(--circle__z-index);
-  top: calc(50% - calc(var(--circle__size) / 2));
+  top: var(--circle__position);
 
   background-color: var(--circle__background-color);
   border: var(--circle__border);
